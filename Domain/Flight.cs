@@ -11,6 +11,9 @@ namespace Domain
 
         public Guid Id { get; set; }
 
+        [Obsolete("Needed by Entity Framework")]
+        Flight() { }
+
         public Flight(int seatCapacity)
         {
             RemainingNumberOfSeats = seatCapacity;

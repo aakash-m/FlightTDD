@@ -1,6 +1,7 @@
 using Data;
 using Domain;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Tests
 {
@@ -9,7 +10,7 @@ namespace Application.Tests
         [Fact]
         public void Books_flight()
         {
-            Entities entities = new Entities();
+            Entities entities = new Entities(new DbContextOptionsBuilder<Entities>().UseInMemoryDatabase("Flight").Options);
 
             Flight flight = new Flight(3);
             entities.Flights.Add(flight);
