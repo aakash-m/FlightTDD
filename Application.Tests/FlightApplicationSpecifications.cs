@@ -7,8 +7,10 @@ namespace Application.Tests
 {
     public class FlightApplicationSpecifications
     {
-        [Fact]
-        public void Books_flight()
+        [Theory]
+        [InlineData("a@a.com", 2)]
+        [InlineData("b@b.com", 3)]
+        public void Books_flight(string passengerEmail, int numberOfSeatsToBook)
         {
             Entities entities = new Entities(new DbContextOptionsBuilder<Entities>().UseInMemoryDatabase("Flight").Options);
 
@@ -16,50 +18,8 @@ namespace Application.Tests
             entities.Flights.Add(flight);
 
             BookingService bookingService = new BookingService(entities: entities);
-            bookingService.Book(new BookDataTransferObject(flightId: flight.Id, passengerEmail: "a@b.com", numberOfSeats: 2));
-            bookingService.FindBookings(flight.Id).Should().ContainEquivalentOf(new BookingReadModel(passengerEmail: "a@b.com", numberOfSeats: 2));
-        }
-    }
-
-    public class BookingService
-    {
-        public BookingService(Entities entities)
-        {
-
-        }
-
-        public void Book(BookDataTransferObject BookDto)
-        {
-
-        }
-
-        public IEnumerable<BookingReadModel> FindBookings(Guid flightId)
-        {
-            return new[]
-            {
-                new BookingReadModel(passengerEmail: "a@b.com", numberOfSeats: 2)
-            };
-        }
-
-    }
-
-    public class BookDataTransferObject
-    {
-        public BookDataTransferObject(Guid flightId, string passengerEmail, int numberOfSeats)
-        {
-
-        }
-    }
-
-    public class BookingReadModel
-    {
-        public string PassengerEmail { get; set; }
-        public int NumberOfSeats { get; set; }
-
-        public BookingReadModel(string passengerEmail, int numberOfSeats)
-        {
-            PassengerEmail= passengerEmail;
-            NumberOfSeats= numberOfSeats;
+            bookingService.Book(new BookDataTransferObject(flightId: flight.Id, passengerEmail, numberOfSeatsToBook));
+            bookingService.FindBookings(flight.Id).Should().ContainEquivalentOf(new BookingReadModel(passengerEmail, numberOfSeatsToBook));
         }
     }
 
