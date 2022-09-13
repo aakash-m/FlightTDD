@@ -9,6 +9,8 @@ namespace Domain
 
         public int RemainingNumberOfSeats { get; set; }
 
+        public Guid Id { get; set; }
+
         public Flight(int seatCapacity)
         {
             RemainingNumberOfSeats = seatCapacity;

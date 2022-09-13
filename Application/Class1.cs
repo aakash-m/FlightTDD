@@ -1,4 +1,4 @@
-﻿namespace Data
+﻿namespace Application
 {
     public class Class1
     {
