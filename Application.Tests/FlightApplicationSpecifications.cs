@@ -19,7 +19,7 @@ namespace Application.Tests
         [Theory]
         [InlineData("a@a.com", 2)]
         [InlineData("b@b.com", 3)]
-        public void Books_flight(string passengerEmail, int numberOfSeatsToBook)
+        public void Remembers_Bookings(string passengerEmail, int numberOfSeatsToBook)
         {
             //Given
             Flight flight = new Flight(3);
@@ -35,7 +35,7 @@ namespace Application.Tests
         [Theory]
         [InlineData(3)]
         [InlineData(13)]
-        public void Cancels_booking(int initialCapacity)
+        public void Frees_up_Seats_After_Booking(int initialCapacity)
         {
             //Given            
             Flight flight = new Flight(initialCapacity);
